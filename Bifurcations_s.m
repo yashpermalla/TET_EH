@@ -49,7 +49,7 @@ for i=1:length(srange)
     temp = curr_len;
 
     while d_index + num_pts > temp
-        temp = temp * 2;
+        temp = temp + 100000;
     end
 
     if temp > curr_len
