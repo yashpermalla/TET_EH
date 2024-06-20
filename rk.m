@@ -33,7 +33,7 @@ for i=2:numiter
     mat(i, 4) = y(3);
     mat(i, 5) = y(4);
 
-    if (abs(y(1) - y(3)) > d/2)
+    if (abs(y(1) - y(3)) > d/2 + 10^-5)
 
         yold = currarr;
 
@@ -80,10 +80,10 @@ for i=2:numiter
 
         if (y(1) - y(3) > d/2)
             mat(i,4) = mat(i,2) - d/2; %Keeps the ball in
-            mat(i-1,6) = 1;
+            mat(i-1,6) = -1;
         else
             mat(i,4) = mat(i,2) + d/2;
-            mat(i-1,6) = -1;
+            mat(i-1,6) = 1;
         end
 
     end 

@@ -35,13 +35,13 @@ for i=1:length(srange)
     %Find top membrane collisions that happened late enough
     upper_collisions = simulation_data(simulation_data(:,6) == 1,:);
     upper_collisions = upper_collisions(upper_collisions(:,1) >= t_start_plot,:);
-    w_dot_upper = upper_collisions(:,5) - upper_collisions(:,3);
+    w_dot_upper = upper_collisions(:,3) - upper_collisions(:,5);
     %RELATIVE VELOCITY at collisions
 
     %Same for bottom membrane collisions
     lower_collisions = simulation_data(simulation_data(:,6) == -1,:);
     lower_collisions = lower_collisions(lower_collisions(:,1) >= t_start_plot,:);
-    w_dot_lower = lower_collisions(:,5) - lower_collisions(:,3);
+    w_dot_lower = lower_collisions(:,3) - lower_collisions(:,5);
 
     num_pts = length(w_dot_upper) + length(w_dot_lower);
 
@@ -62,6 +62,10 @@ for i=1:length(srange)
     vals_for_plot(d_index+numel(w_dot_upper)+1:d_index+num_pts) = w_dot_lower;
     
     d_index = d_index + num_pts;
+
+    if numel(lower_collisions) > 0
+        z0 = lower_collisions(end, 2:5);
+    end
 
     %z0 = transpose(upper_collisions(end,2:5));
     %Changes the initial condition for the next value of d to the last

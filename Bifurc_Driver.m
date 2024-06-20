@@ -4,5 +4,5 @@
 clc, clear all, close all
 
 
-name = 'hsbifurc';
+name = 'ratiobifurc';
 plotit(name,1,2,'$d$', '$\dot{w}(t_{k-1}), \dot{w}(t_{k})$');

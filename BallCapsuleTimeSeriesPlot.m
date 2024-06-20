@@ -6,7 +6,7 @@ clc, clear all, close all
 
 %import COMB_Simulation.*
 
-load('test_params.mat')
+load('grav_nograv_timeseries.mat')
 
 simulation_data = rk(equ, z0, h, t0, t_end, coll_etol);
 
@@ -24,5 +24,5 @@ plot(plot_time, x1_lower, "LineWidth", 1.5, "Color", "blue")
 plot(plot_time, x2, "LineWidth", 1.5, "Color", "red")
 title('Ball-and-Capsule Plot')
 xlabel('$t$', 'Interpreter','latex')
-ylabel('$\dot{w}(t)$', 'Interpreter', 'latex')
+ylabel('$w$', 'Interpreter', 'latex')
 xlim([0 t_end - t_start_plot])
