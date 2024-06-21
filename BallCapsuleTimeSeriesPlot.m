@@ -6,7 +6,7 @@ clc, clear all, close all
 
 %import COMB_Simulation.*
 
-load('grav_nograv_timeseries.mat')
+load('omega_tests.mat')
 
 simulation_data = rk(equ, z0, h, t0, t_end, coll_etol);
 
@@ -22,7 +22,7 @@ hold on
 plot(plot_time, x1_upper, "LineWidth", 1.5, "Color", "blue")
 plot(plot_time, x1_lower, "LineWidth", 1.5, "Color", "blue")
 plot(plot_time, x2, "LineWidth", 1.5, "Color", "red")
-title('Ball-and-Capsule Plot')
+title('Ball-and-Capsule Plot, omega = 7pi')
 xlabel('$t$', 'Interpreter','latex')
 ylabel('$w$', 'Interpreter', 'latex')
 xlim([0 t_end - t_start_plot])

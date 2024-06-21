@@ -110,7 +110,7 @@ classdef Equations < handle
             x2_dot = z(4);
 
             dx1 = x1_dot;
-            dx1_dot = sin(pi * t + obj.phi) - obj.kappa * x1 - obj.Lambda * x1_dot; %- obj.g_bar;
+            dx1_dot = sin(pi * t + obj.phi) - obj.kappa * x1 - obj.Lambda * x1_dot - obj.g_bar;
             dx2 = x2_dot;
             dx2_dot = -obj.g_bar;
 

@@ -11,7 +11,7 @@ function plotit(csv_filename, col_1, col_2, x_title, y_title)
     y = M(:,col_2);
 
     figure;
-    scatter(x,y, "filled");
+    scatter(x,y);
     xlabel(x_title, 'Interpreter','latex');
     ylabel(y_title, 'Interpreter','latex');
     title(y_title + "vs. " + x_title, 'Interpreter', 'latex');

@@ -7,7 +7,7 @@ clc, clear all, close all
 import COMB_Simulation.*
 
 %**run params.m before proceeding**
-load("sanjar-7h-nograv.mat")
+load("omega_tests.mat")
 
 %Conduct simulation
 simulation_data = rk(equ, z0, h, t0, t_end, coll_etol);

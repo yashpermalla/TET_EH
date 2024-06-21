@@ -4,5 +4,5 @@
 clc, clear all, close all
 
 
-name = 'ratiobifurc';
-plotit(name,1,2,'$d$', '$\dot{w}(t_{k-1}), \dot{w}(t_{k})$');
+name = 'eta_energy_test_bifurc';
+plotit(name,1,2,'$m/M$', '$\dot{w}(t_{k-1}), \dot{w}(t_{k})$');
