@@ -4,10 +4,9 @@
 
 clc, clear all, close all
 
-import COMB_Simulation.*
 
 %**run params.m before proceeding**
-load("omega_tests.mat")
+load("kys.mat")
 
 %Conduct simulation
 simulation_data = rk(equ, z0, h, t0, t_end, coll_etol);
@@ -42,6 +41,8 @@ title('$\dot{w}(t)$ vs. $t$', 'Interpreter', 'latex')
 xlabel('$t$', 'Interpreter','latex')
 ylabel('$\dot{w}(t)$', 'Interpreter', 'latex')
 axis([t_start_plot t_end 1.2*min(w_dot) 1.2*max(w_dot)])
+
+equ.d
 
 %x_2/t plot
 %nexttile

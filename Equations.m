@@ -110,7 +110,7 @@ classdef Equations < handle
             x2_dot = z(4);
 
             dx1 = x1_dot;
-            dx1_dot = sin(pi * t + obj.phi) - obj.kappa * x1 - obj.Lambda * x1_dot - obj.g_bar;
+            dx1_dot = sin(pi * t + obj.phi) - obj.kappa * x1 - obj.Lambda * x1_dot;
             dx2 = x2_dot;
             dx2_dot = -obj.g_bar;
 
@@ -126,68 +126,14 @@ classdef Equations < handle
             x2new = (E_2 - E_1)/(obj.eta + 1);
         end
 
-        function update(obj, field, val)
-            switch field
-                case 'angle'
-                    obj.beta = val;
-                    %obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-                case 'capmass'
-                    obj.M = val;
-                    %obj.eta = obj.m / obj.M;
-                    %obj.omega0 = (obj.k/obj.M)^(1/2);
-                    %obj.Omega = obj.omega/obj.omega0;
-                    %obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
-                    %obj.Lambda = (pi * obj.c) / (obj.M * obj.omega);
-                    %obj.kappa = (pi / obj.Omega)^2;
-                    %obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-                case 'length'
-                    obj.s = val;
-                    obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
-                    return;
-                case 'restitution'
-                    obj.r = val;
-                case 'frequency'
-                    obj.omega = val;
-                    %obj.eta = obj.m / obj.M;
-                    %obj.omega0 = (obj.k/obj.M)^(1/2);
-                    %obj.Omega = obj.omega/obj.omega0;
-                    %obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
-                    %obj.Lambda = (pi * obj.c) / (obj.M * obj.omega);
-                    %obj.kappa = (pi / obj.Omega)^2;
-                    %obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-                case 'phase'
-                    obj.phi = val;
-                case 'amplitude'
-                    obj.A = val;
-                    %obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
-                    %obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-                case 'ballmass'
-                    obj.m = val;
-                    %obj.eta = obj.m / obj.M;
-                case 'sprconst'
-                    obj.k = val;
-                    %obj.eta = obj.m / obj.M;
-                    %obj.omega0 = (obj.k/obj.M)^(1/2);
-                    %obj.Omega = obj.omega/obj.omega0;
-                    %obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
-                    %obj.Lambda = (pi * obj.c) / (obj.M * obj.omega);
-                    %obj.kappa = (pi / obj.Omega)^2;
-                    %obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-                case 'dampcoef'
-                    obj.c = val;  
-                    %obj.Lambda = (pi * obj.c) / (obj.M * obj.omega);
-
-            end
-            
+        function recalibrate(obj)
             obj.eta = obj.m / obj.M;
             obj.omega0 = (obj.k/obj.M)^(1/2);
             obj.Omega = obj.omega/obj.omega0;
             obj.d = obj.s * obj.M * (obj.omega)^2 / pi^2 / obj.A;
             obj.Lambda = (pi * obj.c) / (obj.M * obj.omega);
             obj.kappa = (pi / obj.Omega)^2;
-            obj.g_bar = obj.g * sin(obj.beta) * obj.M * (1/obj.A);
-            
-
+            obj.g_bar = obj.g * sin(obj.beta) * obj.M /obj.A;   
         end
     end
 end

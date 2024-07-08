@@ -9,15 +9,15 @@ d = equ.d;
 
 numiter = (t_end - ti)/h;
 
-mat = zeros(numiter,6);
+mat = zeros(2 * numiter,6);
 
 mat(1,:) = [ti, z(1), z(2), z(3), z(4), 0];
 
-mat(:,1) = linspace(ti, t_end, numiter);
+currtime = ti + h;
 
+i = 2;
 
-
-for i=2:numiter
+while currtime <= t_end
 
     currarr = [mat(i-1,2); mat(i-1,3); mat(i-1,4); mat(i-1,5)];
 
@@ -28,6 +28,7 @@ for i=2:numiter
 
 
     y = currarr + h/6 * (k1 + 2*k2 + 2*k3 + k4);
+    mat(i, 1) = currtime;
     mat(i, 2) = y(1);
     mat(i, 3) = y(2);
     mat(i, 4) = y(3);
@@ -44,6 +45,8 @@ for i=2:numiter
         mid = (right + left)/2;
 
         bis_h = mid - left;
+
+        ynew = yold;
 
         while (right - left) > coll_etol
 
@@ -76,19 +79,23 @@ for i=2:numiter
         [mat(i,3), mat(i,5)] = equ.collision_update([mat(i-1,3); mat(i-1,5)]);
 
         mat(i,2) = ynew(1);
-        mat(i,4) = ynew(3);
 
-        if (y(1) - y(3) > d/2)
-            mat(i,4) = mat(i,2) - d/2; %Keeps the ball in
-            mat(i-1,6) = -1;
+        if (y(1) - y(3) > 0)
+            mat(i,4) = mat(i,2) - d/2;
+            mat(i-1,6) = -1;            
         else
             mat(i,4) = mat(i,2) + d/2;
-            mat(i-1,6) = 1;
+            mat(i-1,6) = 1;           
         end
 
     end 
 
+    currtime = mat(i,1) + h;
+    i = i + 1;
+    
+
 end
 
+mat = mat(1:i-1, :);
 
 end
