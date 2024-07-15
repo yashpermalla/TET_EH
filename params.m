@@ -4,26 +4,29 @@
 
 clc, clear all, close all
 
-beta = pi/3;
+beta = 0.4;
 M = .1245;
 m = 0.2 * M;
 r = 0.5;
 omega = 5*pi;
 phi = 0.8;
-A = 5;
+A = 5 * cos(beta);
 k = 25 * pi^2 * M;
 c = M;
-s = .35 * A * pi^2 / M / omega^2;
+s = .56224;
 
-A_range = linspace(5, 1, 50);
+s_range = linspace(0.6, 0.1, 50) * A * pi^2 / M / omega^2;
+
+A_range = linspace(10, 0.4, 25);
 
 omega_range = linspace(10*pi, pi, 20);
 
 m_range = linspace(0.5, 0.05, 20) * M;
 
+beta_range = linspace(1.3, pi/100, 100);
+
 equ = Equations(beta, M, m, s, r, omega, ...
                 phi, A, k, c);
-
 
 %Initial state parameters
 
@@ -57,7 +60,7 @@ z0 = [capinitx;capinitv;ballinitx;ballinitv]; %Four element vector for initial s
 %Simulation parameters
 
 t_end = 5000; %Time at which to end the simulation
-t_start_plot = 4800; %Time at which to start collecting data for plots.
+t_start_plot = 4980; %Time at which to start collecting data for plots.
 %Plots will only display results from between t_start_plot and t_end.
 
 %Numerical methods parameters

@@ -18,8 +18,8 @@ x1_dot = simulation_data(:,3);
 x2 = simulation_data(:,4);
 x2_dot = simulation_data(:,5);
 
-w = x1-x2;
-w_dot = x1_dot-x2_dot;
+w = (x1-x2) * equ.A * pi^2 / equ.M / equ.omega^2;
+w_dot = (x1_dot-x2_dot) * equ.A * pi / equ.M / equ.omega;
 
 figure
 hold on
@@ -28,7 +28,7 @@ tiledlayout(2,2);
 
 %x_1/t plot
 nexttile
-plot(time, w, "LineWidth", 1.5)
+plot(time, w , "LineWidth", 1.5)
 title('$w(t)$ vs. $t$', 'Interpreter', 'latex')
 xlabel('$t$', 'Interpreter','latex')
 ylabel('$w(t)$', 'Interpreter', 'latex')

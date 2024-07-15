@@ -10,7 +10,7 @@ load("kys.mat");
 
 
 %CHANGE
-varying_param = A_range';
+varying_param = beta_range';
 
 ratio_for_plot = zeros(numel(varying_param),1);
 energy_for_plot = zeros(numel(varying_param),1);
@@ -23,7 +23,8 @@ for i=1:length(varying_param)
     %Conduct simulation
 
     %CHANGE
-    equ.A = varying_param(i);
+    equ.beta = varying_param(i);
+    equ.A = 5 * cos(equ.beta);
                                      
     equ.recalibrate();
     
@@ -56,4 +57,4 @@ for i=1:length(varying_param)
     %upper collision from the previous one
 end
 
-writematrix([varying_param, ratio_for_plot, energy_for_plot, disp_for_plot], 'throw.csv');
+writematrix([varying_param, ratio_for_plot, energy_for_plot, disp_for_plot], 'beta_energy_plots_varied_A_5.7.csv');

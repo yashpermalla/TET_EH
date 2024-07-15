@@ -4,5 +4,5 @@
 clc, clear all, close all
 
 
-name = 'A_bifurc_resonance';
-plotit(name,1,2,'Amplitude (N)', '$\dot{w}(t_{k-1}), \dot{w}(t_{k})$');
+name = 'beta_bifurc_varied_A_6pi';
+plotit(name,1,2,'beta', '$\dot{w}(t_{k-1}), \dot{w}(t_{k})$');

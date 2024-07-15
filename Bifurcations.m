@@ -18,7 +18,7 @@ vals_for_plot = zeros(10000000,1); %Will store values of Z_dot to plot in the bi
 %diagrams
 
 %CHANGE
-varying_param = m_range';
+varying_param = beta_range';
 
 param_index = 0;
 
@@ -31,7 +31,8 @@ for i=1:length(varying_param)
     %equ.update('length', s_curr);
 
     %CHANGE
-    equ.m = varying_param(i);
+    equ.beta = varying_param(i);
+    equ.A = 5 * cos(equ.beta);
     equ.recalibrate();
     
     simulation_data = rk(equ, z0, h, t0, t_end, coll_etol);
@@ -60,7 +61,7 @@ for i=1:length(varying_param)
         vals_for_plot(curr_len+1:temp) = 0;
     end
     
-    param_for_plot(param_index+1:param_index+num_pts) = varying_param(i) / equ.M;
+    param_for_plot(param_index+1:param_index+num_pts) = varying_param(i);
     vals_for_plot(param_index+1:param_index+num_pts) = w_dot;
     
     param_index = param_index + num_pts;
@@ -72,4 +73,4 @@ end
 
 param_for_plot = param_for_plot(param_for_plot > 0);
 
-writematrix([param_for_plot, vals_for_plot(1:numel(param_for_plot))], 'eta_bifurc_resonance.csv');
+writematrix([param_for_plot, vals_for_plot(1:numel(param_for_plot))], 'beta_bifurc_varied_A_5.5pi.csv');

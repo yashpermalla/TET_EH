@@ -7,7 +7,7 @@ import plotter.*
 name = 'kys';
 load(name+".mat");
 
-plotmat = zeros(numel(m_range) * numel(omega_range), 5);
+plotmat = zeros(numel(beta_range) * numel(omega_range), 5);
 
 %Will store values of Z_dot to plot in the bifurcation diagrams
 
@@ -15,12 +15,13 @@ param_index = 1;
 
 %FIX THIS LATER
 for i=1:length(omega_range)
-    for j=1:length(m_range)
+    for j=1:length(beta_range)
         20*(i-1) + j
 
         %CHANGE
+        equ.beta = beta_range(j);
+        equ.A = 5 * cos(equ.beta);
         equ.omega = omega_range(i);
-        equ.m = m_range(j);
 
         equ.recalibrate();
 
@@ -42,10 +43,10 @@ for i=1:length(omega_range)
         dispval = max(abs(simulation_data(:,2))) * dist_conversion;
 
         %CHANGE
-        plotmat(param_index, :) = [equ.eta equ.omega energyval ratioval dispval];
+        plotmat(param_index, :) = [equ.beta equ.omega energyval ratioval dispval];
         param_index = param_index + 1;
 
     end
 end
 
-writematrix(plotmat, 'eta_omega_combined_heuristics.csv');
+writematrix(plotmat, 'beta_omega_jointvaried_combined_heuristics.csv');
